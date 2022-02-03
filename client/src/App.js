@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from 'axios'
+import './App.css'
+import { BASE_URL } from './globals'
+import { useEffect } from 'react'
+import Nav from './components/Nav'
+import Search from './components/Search'
+import Post from './components/Post'
 
 function App() {
+  let test = async (req, res) => {
+    const hello = await axios.get(`${BASE_URL}/auth`)
+    console.log('Hi')
+    return res.send(hello)
+  }
+
+  useEffect(() => {
+    test()
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="container">
+        <Nav />
+        <p></p>
+        <Search />
+
+        <Post />
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
